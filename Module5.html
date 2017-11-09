@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> DATA 608: Visualizations </title>
+		
+</head>
+
+<body>
+<h1> Module 5 </h1>
+<h2> <i>Introduction to Javascript</i> </h2>
+<h3> <i>Beginner Homework </i></h3>
+<h4> <i>Oluwakemi Omotunde </i></h4>
+
+<!-- 
+This is one of two homework assignments you can complete for this week (you must do one,
+you may do both for extra credit). This is geared towards those of you who have never
+worked with javascript before.Your assignment should be in the form of an HTML page, which I will be able to run locally.
+
+Refer to the file 'js_in_webpage.html' on the github page for instructions on setting up
+javascript to run on an HTML page, and how to run/debug.
+
+You should complete both of these in 2 (or more) functions on one HTML page.
+-->
+
+<br>
+<h5> Question 1. Create a function to reverse any word that you type in. This can be typed into either an input box or an alert box, and then print the result in a box or on the webpage. </h5>
+		
+     <form name="Reverser" id="form"> <!--form created to enter word -->
+        Reverse String: <input type="text" id="reverseString"/><br/>
+        <input type="submit" value="Reverse"/>
+    </form>
+    <script>
+        function reverseString() {
+            var s = document.getElementById('reverseString').value;
+            // reverse as empty string
+            // prevents adding character(char) to "undefined" string
+            var reversed = '';
+
+            for (var i = s.length - 1; i >= 0; i--) {
+                reversed += s[i];
+            }
+
+            document.getElementById('reverseString').disabled = true;
+            document.getElementById('reverseString').value = reversed;
+        }
+
+        function submit(event) {
+            event.preventDefault();
+            reverseString();
+        }
+
+        // Attach event to form
+        document.getElementById('form').addEventListener('submit', submit);
+    </script>
+	
+	<br>
+	<br>
+	<br>
+	
+<h5>Question 2. Create a function that takes an input number, and prints a table with the first 20 multiples of the number, in order 5x4</h5>
+		
+    <form name="Multiples20, id = "form">
+		Number Input: <input type = "number" id = "createMultiples"/><br/> <!--form created to enter number -->
+		<input type="button" value="Print Table" onClick =
+		"if(document.Multiples20.numberInput.value != '')
+			(createMultiples();)
+		else { alert 'Please input number');)
+		document.Multiples20.numberInput.focus();">
+          </form>
+	
+<div id="div"></div>
+<script>
+		function createMultiples () {
+    
+		//create array of the number 1 through 20 so that we can multiply our input by each
+			var myArr =  d3.range(1, 21, 1).map(function(d) { return d * document.Multiples20.numberInput.value ;});
+	
+		//break up into 5x4
+			result =  [out.slice(0, 4), out.slice(4, 8), out.slice(8, 12),  out.slice(12, 16), out.slice(16, 21)]
+			
+			document.getElementById("div").innerHTML = ""
+	
+			d3.select("#div1")
+				.append("table")
+				.style("border-collapse", "collapse")
+				.style("border", "2px black solid")
+
+				.selectAll("tr")
+				.data(result)
+				.enter().append("tr")
+
+				.selectAll("td")
+				.data(function(d){return d;})
+				.enter().append("td")
+				.style("border", "1px black solid")
+				.style("padding", "5px")
+				.on("mouseover", function(){d3.select(this).style("background-color", "aliceblue")})
+				.on("mouseout", function(){d3.select(this).style("background-color", "white")})
+				.text(function(d){return d;})
+				.style("font-size", "12px");
+	
+}
+</script>
+
+</body>
+
+
+</html>
